@@ -1,0 +1,29 @@
+plugins {
+    id 'java-library'
+    id 'kotlin'
+    id 'com.android.lint'
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+lintOptions {
+    htmlReport true
+    htmlOutput file("lint-report.html")
+    textReport true
+    absolutePaths false
+    ignoreTestSources true
+}
+
+dependencies {
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    def androidToolsVersion = '27.1.2'
+    compileOnly "com.android.tools.lint:lint-api:$androidToolsVersion"
+    compileOnly "com.android.tools.lint:lint-checks:$androidToolsVersion"
+}
+jar {
+    manifest {
+        attributes("Lint-Registry-v2": "com.keyboardr.kotlinexceptiontest.lint.CheckedIssueRegistry")
+    }
+}
